@@ -24,6 +24,8 @@ consumos_totales = []
 # Asi como que fueran clientes, un registro por edificio. (1-4)
 for i in range(edificios):
     print(f"Edificio #{i + 1}")
+    # El consumo semanal esta en 0 y luego se ira acumulando
+    # Acorde a los valores que se ingresen
     consumo_sem = 0
 
     # En esta parte se ponen la serie de los 7 dias para que repitan
@@ -33,20 +35,23 @@ for i in range(edificios):
         print("Mañana = 0 | Tarde = 1 | Noche = 2")
         consumo_dia = 0
 
-        # Aqui los datos no son numeros, son palabras, asi que usariamos float
-        # De esta manera localiza los datos mañana, tarde, noche y asi los pone en orden
-        # Primero pregunta de dia, luego tarde, luego noche y repite posteriormente.
+        # Aqui los turnos se guardaran, los 3 turnos posteriormente cada dia
+        # Tu ingresarias el consumo por cada turno, ese valor va a ser calculado luego.
         for turno in range(turnos):
             consumo = float(input(f"Ingrese consumo en {turno} (kWh): "))
+            # Finalmente, se agrega el "+=" como acomulacion de los datos
             consumo_dia += consumo
 
         consumo_sem += consumo_dia
     
+    # El valor "append" funciona para agregar datos, aqui sirviran en la formula para el resultado.
     consumos_totales.append(consumo_sem)
         
 # Finalmente esto seria el output, lo que se va a mostrar de resultados finales a el calculo
 print("Resultados de cada edificio: ")
 for i in range(edificios):
     total = consumos_totales[i]
+    # Calculo del promedio
     promedio = total / dias
+    # Aqui se escribira el resultado final, los ":.2f" reducen a 2 decimales
     print(f"Edificio {i + 1}: Total = {total:.2f} kWh | Promedio diario = {promedio:.2f} kWh")
